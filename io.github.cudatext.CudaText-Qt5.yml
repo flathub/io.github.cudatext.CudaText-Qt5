@@ -47,8 +47,8 @@ modules:
         sha256: '9d33819e4cbf6258f2a35ef4cc7536b2e91bb4b884cbf15a99c80332ef308c44'
         dest: src/ATBinHex-Lazarus
       - type: archive
-        url: https://github.com/Alexey-T/ATFlatControls/archive/refs/tags/2021.07.09.tar.gz
-        sha256: '61aaacf795ffde0478c7e04dd9878d08e79e7c96f4f4ece10108e65403a36aaa'
+        url: https://github.com/Alexey-T/ATFlatControls/archive/refs/tags/2021.07.22.tar.gz
+        sha256: 'c98a9da71ff2190d0d4d684b644e6ab25d003bd01e1d582fa6feeb09176fd86a'
         dest: src/ATFlatControls
       - type: archive
         url: https://github.com/Alexey-T/ATSynEdit/archive/refs/tags/2021.08.20.tar.gz
