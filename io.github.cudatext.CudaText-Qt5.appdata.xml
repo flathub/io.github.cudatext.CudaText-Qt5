@@ -107,6 +107,6 @@
   </provides>
 
   <releases>
-    <release version="1.142.0" date="2021-08-21"/>
+    <release version="1.142.2" date="2021-08-24"/>
   </releases>
 </component>
