@@ -1,6 +1,6 @@
 app-id: io.github.cudatext.CudaText-Qt5
 runtime: org.kde.Platform
-runtime-version: '5.15'
+runtime-version: '5.15-21.08'
 sdk: org.kde.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.freepascal
@@ -27,10 +27,8 @@ modules:
         commands:
           - cp -r /usr/lib/sdk/freepascal/share/lazarus/lcl/interfaces/qt5/cbindings/.
             .
+          - sed -e"s/target.path = .\+/target.path = '\/app\/lib'/" -i ./Qt5Pas.pro
     buildsystem: qmake
-    config-opts:
-      - -after
-      - target.path=/app/lib
 
   - name: cudatext
     sources:
