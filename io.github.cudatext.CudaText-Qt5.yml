@@ -49,8 +49,8 @@ modules:
         sha256: 54bc92cc70971f4c4ab6968d32fbe8675fbbc208a2dc4f54f0b33db7e894cf05
         dest: src/ATFlatControls
       - type: archive
-        url: https://github.com/Alexey-T/ATSynEdit/archive/refs/tags/2021.11.21.tar.gz
-        sha256: 1103a53e696552465629c34e776aaf6ecac40ef274c99da88303ebea8c8e2dc7
+        url: https://github.com/Alexey-T/ATSynEdit/archive/refs/tags/2021.11.25.tar.gz
+        sha256: 5aa5e68e4eba37fa6cb9749e2ce417f563a6d69efad95580a6988317fa8d33b2
         dest: src/ATSynEdit
       - type: archive
         url: https://github.com/Alexey-T/ATSynEdit_Cmp/archive/refs/tags/2021.09.14.tar.gz
@@ -61,8 +61,8 @@ modules:
         sha256: 02133bd80cddf11457c420d21052747bfeb5fb2db20fa3585c222c45b106cd0f
         dest: src/EControl
       - type: archive
-        url: https://github.com/Alexey-T/ATSynEdit_Ex/archive/refs/tags/2021.09.03.tar.gz
-        sha256: 8c0375c50cf29259254bcc4b4ad53a5015484280d0d02e15d2079f2217b3f047
+        url: https://github.com/Alexey-T/ATSynEdit_Ex/archive/refs/tags/2021.11.25.tar.gz
+        sha256: e347e3985cb58950bb9cec58d2607d01195cc77678a8cd048d6a80e00e4930b9
         dest: src/ATSynEdit_Ex
       - type: archive
         url: https://github.com/Alexey-T/Python-for-Lazarus/archive/refs/tags/2021.10.27.tar.gz
@@ -73,8 +73,8 @@ modules:
         sha256: cba0d68fee260a5f7aff51933014fe53ea3eb71f6d8349ff660b8b2a04028eaf
         dest: src/Emmet-Pascal
       - type: archive
-        url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.149.3.tar.gz
-        sha256: bbe354d8eec29bd8b21cf521739bae8f01d866656ecf157094d0503daf27555a
+        url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.150.0.tar.gz
+        sha256: 380d8186aa7b18a1fd43a7cacf5298fa6171f5d3386b5cba3b650495df5d8e4c
         dest: src/CudaText
       - type: file
         path: io.github.cudatext.CudaText-Qt5.appdata.xml
