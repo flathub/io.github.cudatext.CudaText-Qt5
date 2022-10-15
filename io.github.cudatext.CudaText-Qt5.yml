@@ -1,6 +1,6 @@
 app-id: io.github.cudatext.CudaText-Qt5
 runtime: org.kde.Platform
-runtime-version: '5.15-21.08'
+runtime-version: '5.15-22.08'
 sdk: org.kde.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.freepascal
@@ -49,8 +49,8 @@ modules:
         sha256: 92ad84e3e2917464777aca2a92d1b3daf830c203b666ec56731759119644c2ac
         dest: src/ATFlatControls
       - type: archive
-        url: https://github.com/Alexey-T/ATSynEdit/archive/refs/tags/2022.10.01.tar.gz
-        sha256: 2fcb6c44c56382840ca6cfb6af726ca9054f26cbf599f8dfb80a3cdcd3515bf7
+        url: https://github.com/Alexey-T/ATSynEdit/archive/refs/tags/2022.10.09.tar.gz
+        sha256: 308bee82071fd68b8b7f9339c65a7bc5a15711cb9b9409bd227dd01ae70e72ee
         dest: src/ATSynEdit
       - type: archive
         url: https://github.com/Alexey-T/ATSynEdit_Cmp/archive/refs/tags/2022.10.03.tar.gz
@@ -73,8 +73,8 @@ modules:
         sha256: 00cc338f891e039a6ba9493d995c9dee2c779b3629e95e65f59c818a55a78478
         dest: src/Emmet-Pascal
       - type: archive
-        url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.172.0.tar.gz
-        sha256: c33793d680ac90668245693b001f55d37f3beae6d3c0abe8a10374787c467b3a
+        url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.172.5.tar.gz
+        sha256: 862873d8a3996dc989da2b5505d9febc295eeeb59d22b8e2d0b913e80e30928b
         dest: src/CudaText
       - type: file
         path: io.github.cudatext.CudaText-Qt5.appdata.xml
