@@ -23,12 +23,17 @@ finish-args:
 modules:
   - name: qt5pas
     sources:
-      - type: shell
-        commands:
-          - cp -r /usr/lib/sdk/freepascal/share/lazarus/lcl/interfaces/qt5/cbindings/.
-            .
-          - sed -e"s/target.path = .\+/target.path = '\/app\/lib'/" -i ./Qt5Pas.pro
-    buildsystem: qmake
+      - type: archive
+        url: https://gitlab.com/freepascal.org/lazarus/lazarus/-/archive/lazarus_2_2_0/lazarus-lazarus_2_2_0.tar.gz
+        sha256: 37867f20be348787f1d783d0867573a838a448e19d36dd6e3b5cd71763c38db5
+        dest: src/lazarus
+    buildsystem: simple
+    build-commands:
+      - cp -r src/lazarus/lcl/interfaces/qt5/cbindings/. .
+      - sed -e"s/target.path = .\+/target.path = '\/app\/lib'/" -i ./Qt5Pas.pro
+      - qmake -makefile
+      - make -j
+      - make install
 
   - name: cudatext
     sources:
