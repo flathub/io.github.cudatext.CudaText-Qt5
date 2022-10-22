@@ -45,16 +45,16 @@ modules:
         sha256: 6731b92a33e5e854d80da9af7184f4cbbde3897118a9b82bf017657a9cd39421
         dest: src/ATBinHex-Lazarus
       - type: archive
-        url: https://github.com/Alexey-T/ATFlatControls/archive/refs/tags/2022.09.18.tar.gz
-        sha256: 92ad84e3e2917464777aca2a92d1b3daf830c203b666ec56731759119644c2ac
+        url: https://github.com/Alexey-T/ATFlatControls/archive/refs/tags/2022.10.15.tar.gz
+        sha256: c82d91260cc03207e89e00d225e2732e18a37cf76748c9a258ebdcbc60820e83
         dest: src/ATFlatControls
       - type: archive
-        url: https://github.com/Alexey-T/ATSynEdit/archive/refs/tags/2022.10.09.tar.gz
-        sha256: 308bee82071fd68b8b7f9339c65a7bc5a15711cb9b9409bd227dd01ae70e72ee
+        url: https://github.com/Alexey-T/ATSynEdit/archive/refs/tags/2022.10.15.tar.gz
+        sha256: 220df4a240e9b2156a6de52a04fe3214fe049396266910141480ffd3f7d951e2
         dest: src/ATSynEdit
       - type: archive
-        url: https://github.com/Alexey-T/ATSynEdit_Cmp/archive/refs/tags/2022.10.03.tar.gz
-        sha256: aa6ccdf4888ca3c9fd6cf147eb9d7af7a8d97f6c0e831df4174cd7639c21b637
+        url: https://github.com/Alexey-T/ATSynEdit_Cmp/archive/refs/tags/2022.10.18.tar.gz
+        sha256: 0f34cc51323432e65c2821719e539e060419efb165695edef77a248384125dfa
         dest: src/ATSynEdit_Cmp
       - type: archive
         url: https://github.com/Alexey-T/EControl/archive/refs/tags/2022.08.22.tar.gz
@@ -73,8 +73,8 @@ modules:
         sha256: 00cc338f891e039a6ba9493d995c9dee2c779b3629e95e65f59c818a55a78478
         dest: src/Emmet-Pascal
       - type: archive
-        url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.172.5.tar.gz
-        sha256: 862873d8a3996dc989da2b5505d9febc295eeeb59d22b8e2d0b913e80e30928b
+        url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.173.2.tar.gz
+        sha256: 85da86f43284e356b9c59e25574d0c6dc26f4a5f31e6e341219efb99d226222a
         dest: src/CudaText
       - type: file
         path: io.github.cudatext.CudaText-Qt5.appdata.xml
