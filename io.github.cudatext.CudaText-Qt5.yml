@@ -38,8 +38,8 @@ modules:
   - name: cudatext
     sources:
       - type: archive
-        url: https://github.com/bgrabitmap/bgrabitmap/archive/refs/tags/v11.5.2.tar.gz
-        sha256: b46ff754027774f615e0c8d5c86617c3be1bd55573d660383fd74a7b23c3b322
+        url: https://github.com/bgrabitmap/bgrabitmap/archive/refs/tags/v11.5.3.tar.gz
+        sha256: cc23fb6ef8c2bbfd4f454774a47071e93cad214cf0197fede29c0057ef49fc80
         dest: src/bgrabitmap
       - type: archive
         url: https://github.com/Alexey-T/EncConv/archive/refs/tags/2022.06.19.tar.gz
@@ -50,12 +50,12 @@ modules:
         sha256: 6731b92a33e5e854d80da9af7184f4cbbde3897118a9b82bf017657a9cd39421
         dest: src/ATBinHex-Lazarus
       - type: archive
-        url: https://github.com/Alexey-T/ATFlatControls/archive/refs/tags/2022.11.03.tar.gz
-        sha256: 10d84d111f23c0eebd5c2aef995a207c8d15a70e5a6830cc4d8bc7c732b2518d
+        url: https://github.com/Alexey-T/ATFlatControls/archive/refs/tags/2022.11.09.tar.gz
+        sha256: 5826978aa591d8daa12e47d20b4a09843b8bcbcc0169378798c191683be7ab37
         dest: src/ATFlatControls
       - type: archive
-        url: https://github.com/Alexey-T/ATSynEdit/archive/refs/tags/2022.11.03.tar.gz
-        sha256: 2b71100a204c5378b186ddbcfd2a8fa4bdc68b4d2d2c6f84387022c9d7466e8e
+        url: https://github.com/Alexey-T/ATSynEdit/archive/refs/tags/2022.11.09.tar.gz
+        sha256: b54fb2a363d64983b63afeb6300e45931fcbad8fc55844b7d902e66c550242ac
         dest: src/ATSynEdit
       - type: archive
         url: https://github.com/Alexey-T/ATSynEdit_Cmp/archive/refs/tags/2022.10.18.tar.gz
@@ -78,8 +78,8 @@ modules:
         sha256: 00cc338f891e039a6ba9493d995c9dee2c779b3629e95e65f59c818a55a78478
         dest: src/Emmet-Pascal
       - type: archive
-        url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.175.0.tar.gz
-        sha256: 658a89af8ffe15706c49ccb8729ea344c135b2c95d4906b8b0bcb7298f904919
+        url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.176.0.tar.gz
+        sha256: d04bed44dd0bde80150458b02efec4cfbec2b4301f480e251a3b768651882ef3
         dest: src/CudaText
       - type: file
         path: io.github.cudatext.CudaText-Qt5.appdata.xml
