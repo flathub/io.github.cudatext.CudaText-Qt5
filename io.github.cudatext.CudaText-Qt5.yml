@@ -42,8 +42,8 @@ modules:
         sha256: cc23fb6ef8c2bbfd4f454774a47071e93cad214cf0197fede29c0057ef49fc80
         dest: src/bgrabitmap
       - type: archive
-        url: https://github.com/Alexey-T/EncConv/archive/refs/tags/2022.06.19.tar.gz
-        sha256: 44df1ccb7516f44ac8ffe48e75a3fa1d1dd11455afc916916faaa2b7257ffe36
+        url: https://github.com/Alexey-T/EncConv/archive/refs/tags/2022.12.14.tar.gz
+        sha256: da8ac6226735b586fc810d03c46a7ea4eeff973795bd1f585427d6372d2dc61b
         dest: src/EncConv
       - type: archive
         url: https://github.com/Alexey-T/ATBinHex-Lazarus/archive/refs/tags/2022.06.14.tar.gz
@@ -78,8 +78,8 @@ modules:
         sha256: 00cc338f891e039a6ba9493d995c9dee2c779b3629e95e65f59c818a55a78478
         dest: src/Emmet-Pascal
       - type: archive
-        url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.178.5.tar.gz
-        sha256: 872ab3d7cc5ed14be18d533a59950f084332e7960f3da81b7e76b95367d098ac
+        url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.179.0.tar.gz
+        sha256: 55432ef13f0c002c21cbc6f8a8924e630a0cb782b43b17d1cc59615bdd321291
         dest: src/CudaText
       - type: file
         path: io.github.cudatext.CudaText-Qt5.appdata.xml
