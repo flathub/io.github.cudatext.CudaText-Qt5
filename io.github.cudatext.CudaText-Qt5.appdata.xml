@@ -4,7 +4,7 @@
   <project_license>MPL-2.0</project_license>
   <metadata_license>FSFAP</metadata_license>
   <name>CudaText</name>
-  <summary>Open source and cross-platform text editor.</summary>
+  <summary>Open source and cross-platform text editor</summary>
 
   <description>
     <p>CudaText is a cross-platform text editor, written in Object Pascal. It is open source project and can be used free of charge, even for business. It starts quite fast: ~0.3 sec with ~30 plugins, on Linux on CPU Intel Core i3 3GHz. It is extensible by Python add-ons: plugins, linters, code tree parsers, external tools. Syntax parser is feature-rich, based on EControl engine (though not as fast as in some competitors).</p>
