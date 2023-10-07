@@ -50,12 +50,12 @@ modules:
         sha256: 7fbf3b5304f40a91bfe17cae21419bab3834c24b2b8fb9920f2d5bdadb5f0adf
         dest: src/ATBinHex-Lazarus
       - type: archive
-        url: https://github.com/Alexey-T/ATFlatControls/archive/refs/tags/2023.09.07.tar.gz
-        sha256: 3fd3e10b0728c88c1efda9dd3c5f786f5f4210d9d28054887b558299dfdec023
+        url: https://github.com/Alexey-T/ATFlatControls/archive/refs/tags/2023.10.02.tar.gz
+        sha256: f7e9f36e79552b8151fc7c5681a4050c81d1a139afd6274460e91e8037212b3c
         dest: src/ATFlatControls
       - type: archive
-        url: https://github.com/Alexey-T/ATSynEdit/archive/refs/tags/2023.09.18.tar.gz
-        sha256: f296cbc1a6fccffa7805dbbc049f4d58e558d4350464b76df95e76324d011014
+        url: https://github.com/Alexey-T/ATSynEdit/archive/refs/tags/2023.10.03.tar.gz
+        sha256: b8e2a07beeda0847b16ef0e385235d938b9c9bf207c3b18f6c6085a2a6aa821b
         dest: src/ATSynEdit
       - type: archive
         url: https://github.com/Alexey-T/ATSynEdit_Cmp/archive/refs/tags/2023.05.31.tar.gz
@@ -66,8 +66,8 @@ modules:
         sha256: 878966a158212a8aff332a0b2b3bdd51c46ad292c5d12a6f88afc5467284ccf1
         dest: src/EControl
       - type: archive
-        url: https://github.com/Alexey-T/ATSynEdit_Ex/archive/refs/tags/2023.08.12.tar.gz
-        sha256: 656c94085fe70940b9756fb0a70569c1e12b4c409c770d6c4484ef1becc0b06a
+        url: https://github.com/Alexey-T/ATSynEdit_Ex/archive/refs/tags/2023.10.02.tar.gz
+        sha256: 1c100522a935a6ae98b0e6fc143318a73580405964f08622439f3c4e97c0eeb8
         dest: src/ATSynEdit_Ex
       - type: archive
         url: https://github.com/Alexey-T/Python-for-Lazarus/archive/refs/tags/2023.05.15.tar.gz
@@ -78,8 +78,8 @@ modules:
         sha256: a706e4e754fa05c85926fc6a655699d765c27a0d2a045e70d4452c64f4bd904f
         dest: src/Emmet-Pascal
       - type: archive
-        url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.199.0.tar.gz
-        sha256: 2c33875dc1eab721280e1723085847e20354abe2021d099a087bfe693b04d06f
+        url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.200.0.tar.gz
+        sha256: ae0e257af0e5d8a2aa2302d32bde4ab3bb185c2d773b04bc0393b3b62a28f7a4
         dest: src/CudaText
       - type: file
         path: io.github.cudatext.CudaText-Qt5.appdata.xml
