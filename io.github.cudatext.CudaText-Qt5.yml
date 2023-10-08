@@ -14,8 +14,8 @@ build-options:
 default-branch: stable
 command: cudatext
 finish-args:
-  - --socket=x11
   - --socket=wayland
+  - --socket=fallback-x11
   - --filesystem=home
   - --device=dri
   - --share=ipc
