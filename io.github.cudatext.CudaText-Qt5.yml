@@ -24,8 +24,8 @@ modules:
   - name: qt5pas
     sources:
       - type: archive
-        url: https://gitlab.com/freepascal.org/lazarus/lazarus/-/archive/lazarus_2_2_0/lazarus-lazarus_2_2_0.tar.gz
-        sha256: 37867f20be348787f1d783d0867573a838a448e19d36dd6e3b5cd71763c38db5
+        url: https://gitlab.com/JordanL2/lazarus/-/archive/fixes_3_0-2023-12-03/lazarus-fixes_3_0-2023-12-03.tar.gz
+        sha256: a92865be118e9133012a3046667f24a69e29f65e9c6bf9b7f3d6725a0b449f78
         dest: src/lazarus
     buildsystem: simple
     build-commands:
