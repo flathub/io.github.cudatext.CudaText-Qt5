@@ -81,6 +81,10 @@ modules:
         url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.205.5.2.tar.gz
         sha256: 0a5ce1bad9fa86a8de138e093df87a883d8740663a70330d272a7caed3c21656
         dest: src/CudaText
+        x-checker-data:
+          type: anitya
+          project-id: 370760
+          url-template: https://github.com/Alexey-T/CudaText/archive/refs/tags/$version.tar.gz        
       - type: file
         path: io.github.cudatext.CudaText-Qt5.appdata.xml
     buildsystem: simple
