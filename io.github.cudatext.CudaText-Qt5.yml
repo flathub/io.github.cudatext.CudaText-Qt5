@@ -2,15 +2,15 @@ app-id: io.github.cudatext.CudaText-Qt5
 runtime: org.kde.Platform
 runtime-version: '5.15-23.08'
 sdk: org.kde.Sdk
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.freepascal
 build-options:
-  append-path: /usr/lib/sdk/freepascal/bin
+  append-path: /app/lib/sdk/freepascal/bin
   env:
-    PPC_CONFIG_PATH: /usr/lib/sdk/freepascal/etc
-    FPCDIR: /usr/lib/sdk/freepascal/fpcsrc
-    FPC_DIR: /usr/lib/sdk/freepascal/fpcsrc
-    LAZARUS_DIR: /usr/lib/sdk/freepascal/share/lazarus
+    PPC_CONFIG_PATH: /app/lib/sdk/freepascal/etc
+    FPCDIR: /app/lib/sdk/freepascal/fpcsrc
+    FPC_DIR: /app/lib/sdk/freepascal/fpcsrc
+    LAZARUSDIR: /app/lib/sdk/freepascal/share/lazarus
+cleanup-commands:
+  - rm -rf /app/lib/sdk/freepascal
 default-branch: stable
 command: cudatext
 finish-args:
@@ -21,15 +21,88 @@ finish-args:
   - --share=ipc
   - --share=network
 modules:
-  - name: qt5pas
+
+  - name: fpc
+    sources:
+      - type: archive
+        only-arches:
+          - x86_64
+        url: https://downloads.sourceforge.net/project/freepascal/Linux/3.2.2/fpc-3.2.2.x86_64-linux.tar
+        sha256: 5adac308a5534b6a76446d8311fc340747cbb7edeaacfe6b651493ff3fe31e83
+      - type: archive
+        only-arches:
+          - aarch64
+        url: https://downloads.sourceforge.net/project/freepascal/Linux/3.2.2/fpc-3.2.2.aarch64-linux.tar
+        sha256: b39470f9b6b5b82f50fc8680a5da37d2834f2129c65c24c5628a80894d565451
+      - type: archive
+        url: https://downloads.sourceforge.net/project/freepascal/Source/3.2.2/fpcbuild-3.2.2.tar.gz
+        sha256: 85ef993043bb83f999e2212f1bca766eb71f6f973d362e2290475dbaaf50161f
+      - type: patch
+        options: ['-d', 'fpcsrc']
+        path: fpc-3.2.0--glibc-2.34.patch
+    buildsystem: simple
+    build-options:
+      env:
+        - fpcver=3.2.2
+        - PREFIX=/app/lib/sdk/freepascal
+      arch:
+        aarch64:
+          env: [PPNAME=ppca64]
+        x86_64:
+          env: [PPNAME=ppcx64]
+    build-commands:
+      # install src
+      - mkdir -p ${PREFIX} && cp -r fpcsrc ${PREFIX}/
+      # tar x fpcpre
+      - mkdir fpcpre
+      - tar -xf binary.*.tar && tar -C fpcpre -xf base.*.tar.gz
+      - rm *.tar.gz *.tar
+      # compile self
+      - make -C fpcsrc compiler_cycle PP=`pwd`/fpcpre/lib/fpc/${fpcver}/${PPNAME}
+      # compile rtl with new pp
+      - make -C fpcsrc rtl_clean rtl_smart PP=`pwd`/fpcsrc/compiler/${PPNAME}
+      # compile others with new pp,rtl
+      - make -C fpcsrc packages_smart utils_all PP=`pwd`/fpcsrc/compiler/${PPNAME}
+      # install
+      - make -C fpcsrc compiler_distinstall rtl_distinstall packages_distinstall utils_distinstall
+        INSTALL_PREFIX=${PREFIX}
+        PP=`pwd`/fpcsrc/compiler/${PPNAME}
+        FPCMAKE=`pwd`/fpcsrc/utils/fpcm/bin/${FLATPAK_ARCH}-linux/fpcmake
+      # make cfg, add lib path, and link ppc
+      -  ${PREFIX}/lib/fpc/${fpcver}/samplecfg ${PREFIX}/lib/fpc/${fpcver} ${PREFIX}/etc
+      -  echo '-Fl/app/lib' >> ${PREFIX}/etc/fpc.cfg
+      -  ln -s ../lib/fpc/${fpcver}/${PPNAME} ${PREFIX}/bin/${PPNAME}
+      # fix not found ppcaarch64
+      -  ln -s ppca64 ${PREFIX}/bin/ppcaarch64
+
+  - name: lazarus
     sources:
       - type: archive
         url: https://gitlab.com/freepascal.org/lazarus/lazarus/-/archive/lazarus_3_0/lazarus-lazarus_3_0.tar.gz
         sha256: b16f1f6339d43bef8a1ecedd854a2065e60136fdca75149c6321f5c5b54f49dd
-        dest: src/lazarus
+    buildsystem: simple
+    build-options:
+      append-path: /app/lib/sdk/freepascal/bin
+      env:
+        - INSTALL_PREFIX=/app/lib/sdk/freepascal
+    build-commands:
+      - find . -type f -iname makefile.fpc -exec fpcmake -Tall '{}' ';'
+      - make lazbuild OPT='-gl'
+      - touch lazarus startlazarus
+      - make install
+      - sed -i -e "s#__LAZARUSDIR__#$LAZARUSDIR/#" -e "s#__FPCSRCDIR__#$FPCDIR/#" -e "s#/app/bin/fpc#$INSTALL_PREFIX/bin/fpc#"
+        tools/install/linux/environmentoptions.xml
+      - install -Dm644 -t $LAZARUSDIR tools/install/linux/environmentoptions.xml
+
+  - name: qt5pas
+#    sources:
+#      - type: archive
+#        url: https://gitlab.com/freepascal.org/lazarus/lazarus/-/archive/lazarus_3_0/lazarus-lazarus_3_0.tar.gz
+#        sha256: b16f1f6339d43bef8a1ecedd854a2065e60136fdca75149c6321f5c5b54f49dd
+#        dest: src/lazarus
     buildsystem: simple
     build-commands:
-      - cp -r src/lazarus/lcl/interfaces/qt5/cbindings/. .
+      - cp -r ${LAZARUSDIR}/lcl/interfaces/qt5/cbindings/. .
       - sed -e"s/target.path = .\+/target.path = '\/app\/lib'/" -i ./Qt5Pas.pro
       - qmake -makefile
       - make -j
@@ -50,12 +123,12 @@ modules:
         sha256: 66e0a024d5767e49c4d4a97f3089e1046f5ba0256234a7b1f990dd63a3b13e64
         dest: src/ATBinHex-Lazarus
       - type: archive
-        url: https://github.com/Alexey-T/ATFlatControls/archive/refs/tags/2024.01.11.tar.gz
-        sha256: e467ec91dc730f6da88d90d716b8c063854447695a8142c8ff57bc2f5794de02
+        url: https://github.com/Alexey-T/ATFlatControls/archive/refs/tags/2024.01.25.tar.gz
+        sha256: 993dc9027e0f5748315dc02873d30017f09c563dd5bcf000f79b12c44dc860ae
         dest: src/ATFlatControls
       - type: archive
-        url: https://github.com/Alexey-T/ATSynEdit/archive/refs/tags/2024.01.17.tar.gz
-        sha256: f0d8e2cde0c7ea416eee5e707554bfa2384903f53f4acb5631954d3e2bdd09bd
+        url: https://github.com/Alexey-T/ATSynEdit/archive/refs/tags/2024.01.25.tar.gz
+        sha256: 59172edf90110e37e98414d20f586244385d2031023d9a922d3c53beb064af1d
         dest: src/ATSynEdit
       - type: archive
         url: https://github.com/Alexey-T/ATSynEdit_Cmp/archive/refs/tags/2024.01.10.tar.gz
@@ -66,8 +139,8 @@ modules:
         sha256: 0bb9060e21dca1596f2fb5eb03b2714cf82370664cadd9d94568de8db66d0c0c
         dest: src/EControl
       - type: archive
-        url: https://github.com/Alexey-T/ATSynEdit_Ex/archive/refs/tags/2024.01.17.tar.gz
-        sha256: 563550c525bfe9302d5ee27c37250d6de41ed5939f80f2a764577bf2b2584f15
+        url: https://github.com/Alexey-T/ATSynEdit_Ex/archive/refs/tags/2024.01.25.tar.gz
+        sha256: de1e870fefc0db4a1bb45e90e5a9aaa3563db94d853eecb2bc8c72a52134d55c
         dest: src/ATSynEdit_Ex
       - type: archive
         url: https://github.com/Alexey-T/Python-for-Lazarus/archive/refs/tags/2023.06.30.tar.gz
@@ -78,8 +151,8 @@ modules:
         sha256: 9f8967e651253fc7027e8bef4115a45e9fb3b1c85536d1bd390da9c4d8a2efe0
         dest: src/Emmet-Pascal
       - type: archive
-        url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.208.5.tar.gz
-        sha256: ff16c105e57d375c3cf32f03e18b46a10618442cc1b81205c3f398dc3226684e
+        url: https://github.com/Alexey-T/CudaText/archive/refs/tags/1.209.0.tar.gz
+        sha256: 2fe52240e64760b9c987ddaefe4e3078b496e52c0326d9eb9949a107c4db5ad3
         dest: src/CudaText
       - type: file
         path: io.github.cudatext.CudaText-Qt5.appdata.xml
@@ -93,19 +166,19 @@ modules:
           env:
             PPC: ppca64
     build-commands:
-      - lazbuild --ws=qt5 -q --compiler=$PPC --pcp=. --lazarusdir="$LAZARUS_DIR" "./src/bgrabitmap/bgrabitmap/bgrabitmappack.lpk"
-      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUS_DIR" "./src/EncConv/encconv/encconv_package.lpk"
-      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUS_DIR" "./src/ATBinHex-Lazarus/atbinhex/atbinhex_package.lpk"
-      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUS_DIR" "./src/ATFlatControls/atflatcontrols/atflatcontrols_package.lpk"
-      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUS_DIR" "./src/ATSynEdit/atsynedit/atsynedit_package.lpk"
-      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUS_DIR" "./src/ATSynEdit_Cmp/atsynedit_cmp/atsynedit_cmp_package.lpk"
-      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUS_DIR" "./src/EControl/econtrol/econtrol_package.lpk"
-      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUS_DIR" "./src/ATSynEdit_Ex/atsynedit_ex/atsynedit_ex_package.lpk"
-      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUS_DIR" "./src/Python-for-Lazarus/python4lazarus/python4lazarus_package.lpk"
-      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUS_DIR" "./src/Emmet-Pascal/emmet/emmet_package.lpk"
+      - lazbuild --ws=qt5 -q --compiler=$PPC --pcp=. --lazarusdir="$LAZARUSDIR" "./src/bgrabitmap/bgrabitmap/bgrabitmappack.lpk"
+      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUSDIR" "./src/EncConv/encconv/encconv_package.lpk"
+      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUSDIR" "./src/ATBinHex-Lazarus/atbinhex/atbinhex_package.lpk"
+      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUSDIR" "./src/ATFlatControls/atflatcontrols/atflatcontrols_package.lpk"
+      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUSDIR" "./src/ATSynEdit/atsynedit/atsynedit_package.lpk"
+      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUSDIR" "./src/ATSynEdit_Cmp/atsynedit_cmp/atsynedit_cmp_package.lpk"
+      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUSDIR" "./src/EControl/econtrol/econtrol_package.lpk"
+      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUSDIR" "./src/ATSynEdit_Ex/atsynedit_ex/atsynedit_ex_package.lpk"
+      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUSDIR" "./src/Python-for-Lazarus/python4lazarus/python4lazarus_package.lpk"
+      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUSDIR" "./src/Emmet-Pascal/emmet/emmet_package.lpk"
       # Replace references to /usr/share/cudatext with correct path, prior to compiling CudaText
       - sed -i -e"s/\/usr\/share\/cudatext/\\$FLATPAK_DEST\/share\/cudatext/g" src/CudaText/app/proc_globdata.pas
-      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUS_DIR" "./src/CudaText/app/cudatext.lpi"
+      - lazbuild --ws=qt5 -q --pcp=. --lazarusdir="$LAZARUSDIR" "./src/CudaText/app/cudatext.lpi"
       - install -Dm755 src/CudaText/app/cudatext -t $FLATPAK_DEST/bin
       # Install all data and plugins
       - mkdir -p $FLATPAK_DEST/share/cudatext
