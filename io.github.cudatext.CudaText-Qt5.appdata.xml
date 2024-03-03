@@ -8,7 +8,7 @@
 
   <description>
     <p>CudaText is a cross-platform text editor, written in Object Pascal. It is open source project and can be used free of charge, even for business. It starts quite fast: ~0.3 sec with ~30 plugins, on Linux on CPU Intel Core i3 3GHz. It is extensible by Python add-ons: plugins, linters, code tree parsers, external tools. Syntax parser is feature-rich, based on EControl engine (though not as fast as in some competitors).</p>
-	
+
     <p>Features</p>
     <ul>
       <li>Syntax highlight for lot of languages.</li>
@@ -70,7 +70,7 @@
   <launchable type="desktop-id">io.github.cudatext.CudaText-Qt5.desktop</launchable>
 
   <screenshots>
-    <screenshot>
+    <screenshot type="default">
       <image>https://cudatext.github.io/img/cudatext-main.png</image>
     </screenshot>
     <screenshot>
@@ -102,11 +102,7 @@
     </screenshot>
   </screenshots>
 
-  <provides>
-    <id>io.github.cudatext.CudaText-Qt5</id>
-  </provides>
-
   <releases>
-    <release version="1.209.0" date="2024-02-03"/>
+    <release version="1.210.0" date="2024-03-03"/>
   </releases>
 </component>
